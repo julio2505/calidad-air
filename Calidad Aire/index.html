@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicacion para mostrar datos de calidad del aire</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <h1>Mostrar Datos de Calidad de Aire</h1>
+    <table id="respuesta">
+        <thead>
+          <th>ID</th>
+          <th>estaciones</th>
+          <th></th>
+
+        </thead>
+        <tbody id="respuesta_body">
+        </tbody>
+    </table>
+
+    
+   <script type="text/javascript">
+       const tbody = document.querySelector('#respuesta tbody');
+       const endpoint = 'https://api.datos.gob.mx/v1/calidadAire';
+       fetch(endpoint)
+       .then(request => request.text())
+       .then(data => console.log(data));
+
+       const request = new XMLHttpRequest();
+
+       request.open('GET', endpoint);
+
+       request.responseType = 'json';
+       request.send();
+
+       request.onload = function(){
+          const calidad = request.response;
+
+       }
+
+     //  request.open('GET', endpoint);
+       for(let i = 0; i < endpoint.length; i++) {
+            let fila = tbody.insertRow();
+            fila.insertCell().innerHTML = endpoint[i]['id'];  
+       }
+
+
+       
+   </script>
+        
+</body>
+</html>
